@@ -218,6 +218,7 @@ namespace LearningCenter
         private void Save_Click(object sender, EventArgs e)
         {
             Teacher teacher = new Teacher();
+
             if (!validation())
             {
 
@@ -240,6 +241,7 @@ namespace LearningCenter
 
 
             }
+            teacher = dBManager.GetTeacherByPhone(teachPhTBox.Text);
             teacher.setName(nameTbox.Text);
             teacher.setPhoneNumber(phoneTBox.Text);
             teacher.setSalary(int.Parse(salaryTbox.Text));
@@ -271,7 +273,12 @@ namespace LearningCenter
                 }
 
 
-            
+            Teacher tempTeach = new Teacher();
+            if(dBManager.GetTeacherByPhone(phoneTBox.Text) != null)
+            {
+                MessageBox.Show("מורה כבר קיים במערכת!");
+                return;
+            }
             teacher.setName(nameTbox.Text);
             teacher.setPhoneNumber(phoneTBox.Text);
             teacher.setSalary(int.Parse(salaryTbox.Text));
