@@ -20,6 +20,7 @@ namespace LearningCenter
         }
         public void clearAll()
         {
+            visitNamesLst.Items.Clear();
             ninLst.Items.Clear();
             tenLst.Items.Clear();
             elevLst.Items.Clear();
@@ -32,7 +33,6 @@ namespace LearningCenter
             {
                 return;
             }
-
             List<Student> poorStudents = new List<Student>();
             poorStudents = dBManager.GetPoorStudents(((Subject)subTBox.SelectedItem).getName());
             foreach (Student student in poorStudents)
@@ -53,6 +53,15 @@ namespace LearningCenter
                         break;
                 }
             }
+            List<Student> maxVisitStnds = new List<Student>();
+            maxVisitStnds = dBManager.GetMaxFreqVisitor();
+            foreach (Student student in maxVisitStnds)
+            {
+                   visitNamesLst.Items.Add(student);
+                freqVisitCount.Text = (student.getCenterVisits()).ToString();
+            }
+
+
 
 
         }
@@ -68,6 +77,11 @@ namespace LearningCenter
         private void Statistics_Load(object sender, EventArgs e)
         {
             OneTimeRun();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

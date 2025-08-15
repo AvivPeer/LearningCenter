@@ -21,7 +21,7 @@ namespace LearningCenter
             connectionString = ConfigurationManager.ConnectionStrings["MySqlConnection"]?.ConnectionString;
             if (string.IsNullOrEmpty(connectionString))
             {
-                connectionString = "Server=localhost;Database=learning_center;Uid=<ID>;Pwd=<PASS>;";
+                connectionString = "Server=localhost;Database=learning_center;Uid=<ID>;Pwd=<PASS>!;";
             }
         }
 
@@ -576,6 +576,51 @@ namespace LearningCenter
 
             return students;
         }
+
+        //GetMaxFreqVisitor
+        public List<Student> GetMaxFreqVisitor()
+        {
+            List<Student> students = new List<Student>();
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = @"SELECT * 
+                                    FROM students 
+                                    WHERE center_visits = (SELECT MAX(center_visits) FROM students);";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var student = new Student();
+
+                                student.setId(reader.GetInt32("id"));
+                                student.setName(reader.GetString("name"));
+                                student.setstdId(reader.GetString("student_number"));
+                                student.setClasLevel(reader.GetInt32("class_level"));
+                                student.setTeacherId(reader.IsDBNull("teacher_id") ? 0 : reader.GetInt32("teacher_id"));
+                                student.setCenterVisits(reader.GetInt32("center_visits"));
+                                student.setLastvisitDate(reader.IsDBNull("last_visit_date") ? null : reader.GetDateTime("last_visit_date"));
+                                student.updateCmnt(reader.IsDBNull("comments") ? "" : reader.GetString("comments"));
+                                students.Add(student);
+
+
+                            }
+                            return students;
+                        }
+                    }
+                }
+
+            }
+            catch(Exception ex) 
+            {
+                return null;
+            }
+        }
+
         // Get all students
         public List<Student> GetAllStudents()
         {

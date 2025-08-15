@@ -38,6 +38,10 @@
             tenLbl = new Label();
             elevLbl = new Label();
             twelLbl = new Label();
+            freqStdLbl = new Label();
+            freqVisitCount = new Label();
+            visitNamesLst = new ListBox();
+            countLbl = new Label();
             SuspendLayout();
             // 
             // ninLst
@@ -132,11 +136,51 @@
             twelLbl.TabIndex = 11;
             twelLbl.Text = "יב";
             // 
+            // freqStdLbl
+            // 
+            freqStdLbl.AutoSize = true;
+            freqStdLbl.Location = new Point(139, 9);
+            freqStdLbl.Name = "freqStdLbl";
+            freqStdLbl.Size = new Size(83, 15);
+            freqStdLbl.TabIndex = 12;
+            freqStdLbl.Text = "המגיע המתמיד";
+            // 
+            // freqVisitCount
+            // 
+            freqVisitCount.AutoSize = true;
+            freqVisitCount.Location = new Point(22, 80);
+            freqVisitCount.Name = "freqVisitCount";
+            freqVisitCount.Size = new Size(34, 15);
+            freqVisitCount.TabIndex = 14;
+            freqVisitCount.Text = "כמות";
+            // 
+            // visitNamesLst
+            // 
+            visitNamesLst.FormattingEnabled = true;
+            visitNamesLst.ItemHeight = 15;
+            visitNamesLst.Location = new Point(62, 27);
+            visitNamesLst.Name = "visitNamesLst";
+            visitNamesLst.Size = new Size(259, 124);
+            visitNamesLst.TabIndex = 15;
+            // 
+            // countLbl
+            // 
+            countLbl.AutoSize = true;
+            countLbl.Location = new Point(22, 65);
+            countLbl.Name = "countLbl";
+            countLbl.Size = new Size(34, 15);
+            countLbl.TabIndex = 16;
+            countLbl.Text = "כמות";
+            // 
             // Statistics
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(countLbl);
+            Controls.Add(visitNamesLst);
+            Controls.Add(freqVisitCount);
+            Controls.Add(freqStdLbl);
             Controls.Add(twelLbl);
             Controls.Add(elevLbl);
             Controls.Add(tenLbl);
@@ -166,5 +210,9 @@
         private Label tenLbl;
         private Label elevLbl;
         private Label twelLbl;
+        private Label freqStdLbl;
+        private Label freqVisitCount;
+        private ListBox visitNamesLst;
+        private Label countLbl;
     }
 }
